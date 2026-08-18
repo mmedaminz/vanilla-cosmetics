@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Snow Bleach | Vanilla Cosmetics</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f0e6;
+    color:#3f4935;
+}
+
+.hero-product{
+    background:#556B2F;
+    color:#fff;
+    text-align:center;
+    padding:35px 20px 45px;
+}
+
+.brand{
+    font-size:14px;
+    letter-spacing:2px;
+    margin-bottom:25px;
+}
+
+.product-image{
+    width:100%;
+    max-width:380px;
+    height:auto;
+    display:block;
+    margin:0 auto 25px;
+    border-radius:25px;
+}
+
+h1{
+    font-size:34px;
+    margin:10px 0;
+}
+
+.subtitle{
+    font-size:17px;
+    line-height:1.9;
+    max-width:600px;
+    margin:15px auto;
+}
+
+.price{
+    font-size:30px;
+    font-weight:bold;
+    margin:22px 0;
+}
+
+.order-btn{
+    display:inline-block;
+    background:#f5f0e6;
+    color:#556B2F;
+    text-decoration:none;
+    padding:16px 38px;
+    border-radius:35px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.section{
+    max-width:800px;
+    margin:auto;
+    padding:45px 20px;
+    text-align:center;
+}
+
+.section h2{
+    font-family:Georgia,serif;
+    font-size:28px;
+    margin-bottom:18px;
+}
+
+.description{
+    line-height:2;
+    font-size:16px;
+}
+
+.benefits{
+    display:grid;
+    gap:12px;
+    margin-top:25px;
+}
+
+.benefit{
+    background:#fff;
+    padding:16px;
+    border-radius:15px;
+    box-shadow:0 3px 12px rgba(0,0,0,.05);
+}
+.order-box{
+    background:#556B2F;
+    color:#fff;
+    border-radius:25px;
+    padding:30px 20px;
+}
+
+.order-box input,
+.order-box select,
+.order-box textarea{
+    width:100%;
+    padding:14px;
+    margin:7px 0;
+    border:0;
+    border-radius:12px;
+    font-size:15px;
+}
+
+.submit-btn{
+    width:100%;
+    margin-top:12px;
+    padding:16px;
+    border:0;
+    border-radius:30px;
+    background:#f5f0e6;
+    color:#556B2F;
+    font-size:17px;
+    font-weight:bold;
+}
+
+.info{
+    margin-top:20px;
+    line-height:2;
+    font-size:14px;
+}
+
+.footer{
+    background:#556B2F;
+    color:#f5f0e6;
+    text-align:center;
+    padding:22px 15px;
+    font-size:12px;
+}
+
+.footer a{
+    color:#f5f0e6;
+    text-decoration:none;
+}
+
+@media(max-width:600px){
+    h1{
+        font-size:29px;
+    }
+
+    .product-image{
+        max-width:320px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section class="hero-product">
+
+    <div class="brand">
+        VANILLA COSMETICS
+    </div>
+
+    <img
+        class="product-image"
+        src="images/Snow.jpg"
+        alt="Snow Bleach"
+    >
+
+    <h1>Snow Bleach</h1>
+
+    <p class="subtitle">
+        عناية متخصصة بالمناطق الداكنة
+        ومظهر أكثر إشراقًا وتناسقًا للبشرة.
+    </p>
+
+    <div class="price">
+        2500 DA
+    </div>
+
+    <a class="order-btn" href="#order">
+        اطلبي الآن
+    </a>
+
+</section>
+
+<section class="section">
+
+    <h2>
+        Snow Bleach
+    </h2>
+
+    <p class="description">
+        كريم تفتيح مصمم للعناية بالمناطق التي تعاني
+        من الاسمرار وتفاوت لون البشرة، مع تركيز خاص
+        على المناطق الحساسة والمناطق الداكنة في الجسم.
+        يساعد على تحسين مظهر البشرة ومنحها مظهرًا
+        أكثر إشراقًا وتجانسًا مع الاستخدام المنتظم.
+    </p>
+
+    <div class="benefits">
+
+        <div class="benefit">
+            ✦ مخصص للعناية بالمناطق الداكنة
+        </div>
+
+        <div class="benefit">
+            ✦ مناسب للمناطق الحساسة وفق تعليمات المنتج
+        </div>
+
+        <div class="benefit">
+            ✦ يساعد على توحيد مظهر لون البشرة
+        </div>
+
+        <div class="benefit">
+            ✦ يمنح البشرة مظهرًا أكثر إشراقًا
+        </div>
+
+        <div class="benefit">
+            ✦ سهل الاستخدام ضمن روتين العناية
+        </div>
+
+    </div>
+
+</section>
+<section class="section" id="order">
+
+    <div class="order-box">
+
+        <h2>
+            اطلبي الآن
+        </h2>
+
+        <p>
+            🚚 التوصيل إلى 69 ولاية
+            <br>
+            💳 الدفع عند الاستلام
+        </p>
+
+        <form id="orderForm">
+
+            <input
+                type="text"
+                id="name"
+                placeholder="الاسم الكامل"
+                required
+            >
+
+            <input
+                type="tel"
+                id="phone"
+                placeholder="رقم الهاتف"
+                required
+            >
+
+            <input
+                type="text"
+                id="wilaya"
+                placeholder="الولاية"
+                required
+            >
+
+            <input
+                type="text"
+                id="commune"
+                placeholder="البلدية"
+                required
+            >
+
+            <textarea
+                id="address"
+                placeholder="العنوان"
+                rows="3"
+                required
+            ></textarea>
+
+            <button class="submit-btn" type="submit">
+                تأكيد الطلب عبر WhatsApp
+            </button>
+
+        </form>
+
+        <div class="info">
+            سيتم تحويلك مباشرة إلى WhatsApp لإرسال طلبك.
+        </div>
+
+    </div>
+
+</section>
+
+<footer class="footer">
+
+    <div>
+        © 2026 Vanilla Cosmetics — جميع الحقوق محفوظة.
+    </div>
+
+    <div>
+        Developed by
+        <a href="#" target="_blank">
+            mohamed amine ziadi
+        </a>
+    </div>
+
+</footer>
+
+<script>
+document.getElementById("orderForm").addEventListener("submit", function(e){
+
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const wilaya = document.getElementById("wilaya").value;
+    const commune = document.getElementById("commune").value;
+    const address = document.getElementById("address").value;
+
+    const message =
+`طلب Snow Bleach
+
+الاسم: ${name}
+الهاتف: ${phone}
+الولاية: ${wilaya}
+البلدية: ${commune}
+العنوان: ${address}
+
+المنتج: Snow Bleach
+السعر: 2500 DA`;
+
+    const whatsapp =
+        "https://wa.me/213798949861?text=" +
+        encodeURIComponent(message);
+
+    window.open(whatsapp, "_blank");
+});
+</script>
+
+</body>
+</html>

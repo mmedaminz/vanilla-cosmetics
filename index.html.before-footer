@@ -1,0 +1,1783 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vanilla Cosmetics</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+    background:#faf8f2;
+    color:#30332c;
+    font-family:Arial,Tahoma,sans-serif;
+}
+
+button,
+input,
+textarea{
+    font-family:inherit;
+}
+
+button{
+    cursor:pointer;
+}
+
+a{
+    text-decoration:none;
+    color:inherit;
+}
+
+/* HEADER */
+
+.header{
+    position:fixed;
+    top:0;
+    right:0;
+    left:0;
+    height:70px;
+    background:rgba(250,248,242,.96);
+    border-bottom:1px solid #e4dfd3;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 18px;
+    z-index:1000;
+}
+
+.logo{
+    text-align:center;
+}
+
+.logo span{
+    display:block;
+    font-family:Georgia,serif;
+    font-size:27px;
+    color:#3f4935;
+}
+
+.logo small{
+    display:block;
+    margin-top:3px;
+    font-size:9px;
+    letter-spacing:3px;
+    color:#788267;
+}
+
+/* ICON BUTTONS */
+
+.icon-button{
+    width:44px;
+    height:44px;
+    border:0;
+    border-radius:50%;
+    background:#f5f0e6;
+    color:#3f4935;
+    font-size:20px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    position:relative;
+}
+
+.cart-count{
+    position:absolute;
+    top:-3px;
+    right:-3px;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    background:#3f4935;
+    color:#fff;
+    font-size:11px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+/* OVERLAY */
+
+.overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.4);
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+    z-index:1500;
+}
+
+.overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
+/* SIDE MENU */
+
+.side-menu{
+    position:fixed;
+    top:0;
+    right:-320px;
+    width:300px;
+    height:100vh;
+    background:#3f4935;
+    color:#fff;
+    padding:85px 25px 30px;
+    z-index:2000;
+    transition:.35s;
+    border-radius:0 0 0 25px;
+}
+
+.side-menu.active{
+    right:0;
+}
+
+.close-menu{
+    position:absolute;
+    top:18px;
+    left:18px;
+    width:42px;
+    height:42px;
+    border:1px solid rgba(255,255,255,.3);
+    border-radius:50%;
+    background:transparent;
+    color:#fff;
+    font-size:25px;
+}
+
+.side-logo{
+    font-family:Georgia,serif;
+    font-size:27px;
+    margin-bottom:35px;
+}
+
+.side-menu a{
+    display:block;
+    padding:17px 0;
+    border-bottom:1px solid rgba(255,255,255,.15);
+    font-size:14px;
+}
+
+/* HERO */
+
+.hero{
+    min-height:100vh;
+    padding:120px 20px 70px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    background:
+    radial-gradient(circle at 20% 20%,rgba(89,99,74,.12),transparent 35%),
+    radial-gradient(circle at 80% 80%,rgba(214,205,184,.4),transparent 35%),
+    #faf8f2;
+}
+
+.hero-content{
+    max-width:650px;
+}
+
+.eyebrow{
+    font-size:10px;
+    letter-spacing:4px;
+    color:#788267;
+    margin-bottom:20px;
+}
+
+.hero h1{
+    font-family:Georgia,serif;
+    font-size:clamp(60px,15vw,105px);
+    line-height:.85;
+    color:#3f4935;
+}
+
+.hero h1 span{
+    font-style:italic;
+    font-size:.55em;
+    color:#788267;
+}
+
+.hero-text{
+    max-width:500px;
+    margin:35px auto;
+    color:#77796f;
+    line-height:2;
+    font-size:14px;
+}
+
+.main-btn{
+    display:inline-block;
+    padding:15px 30px;
+    border-radius:30px;
+    background:#3f4935;
+    color:#fff;
+    transition:.3s;
+}
+
+.main-btn:hover{
+    transform:translateY(-3px);
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+    .header{
+        padding:0 14px;
+    }
+
+    .logo span{
+        font-size:23px;
+    }
+
+    .hero h1{
+        font-size:68px;
+    }
+
+    .side-menu{
+        width:290px;
+    }
+} 
+/* PRODUCTS */
+
+.products-section{
+    padding:90px 18px;
+    background:#faf8f2;
+}
+
+.section-heading{
+    max-width:650px;
+    margin:0 auto 45px;
+    text-align:center;
+}
+
+.section-heading span{
+    font-size:10px;
+    letter-spacing:4px;
+    color:#788267;
+}
+
+.section-heading h2{
+    font-family:Georgia,serif;
+    font-size:42px;
+    color:#3f4935;
+    margin:10px 0;
+}
+
+.section-heading p{
+    color:#77796f;
+    font-size:14px;
+}
+
+.products-container{
+    max-width:600px;
+    margin:auto;
+    display:flex;
+    flex-direction:column;
+    gap:25px;
+}
+
+.product-card{
+    background:#fff;
+    border:1px solid #e4dfd3;
+    border-radius:24px;
+    overflow:hidden;
+    box-shadow:0 8px 25px rgba(50,50,40,.05);
+}
+
+.product-image{
+    width:100%;
+    aspect-ratio:1/1;
+    background:#f5f0e6;
+    overflow:hidden;
+}
+
+.product-image img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+.product-info{
+    padding:22px;
+}
+
+.product-category{
+    font-size:9px;
+    letter-spacing:2px;
+    color:#788267;
+}
+
+.product-info h3{
+    font-size:20px;
+    margin:8px 0;
+    color:#30332c;
+}
+
+.product-info p{
+    color:#77796f;
+    font-size:13px;
+    line-height:1.9;
+    margin-bottom:18px;
+}
+
+.product-bottom{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+}
+
+.product-price{
+    color:#3f4935;
+    font-size:20px;
+    font-weight:bold;
+    white-space:nowrap;
+}
+
+.product-price small{
+    font-size:11px;
+}
+
+.add-cart{
+    border:0;
+    background:#3f4935;
+    color:#fff;
+    border-radius:25px;
+    padding:11px 16px;
+    font-size:12px;
+    transition:.25s;
+}
+
+.add-cart:hover{
+    background:#59634a;
+    transform:translateY(-2px);
+}
+
+/* ORDER */
+
+.order-section{
+    padding:90px 18px;
+    background:#f5f0e6;
+}
+
+.order-box{
+    max-width:600px;
+    margin:auto;
+    background:#fff;
+    padding:28px;
+    border-radius:25px;
+    border:1px solid #e4dfd3;
+}
+
+.form-group{
+    margin-bottom:17px;
+}
+
+.form-group label{
+    display:block;
+    font-size:13px;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+input,
+textarea{
+    width:100%;
+    border:1px solid #e4dfd3;
+    background:#faf8f2;
+    border-radius:12px;
+    padding:14px;
+    outline:none;
+    color:#30332c;
+    font-size:14px;
+}
+
+input:focus,
+textarea:focus{
+    border-color:#59634a;
+}
+
+textarea{
+    height:95px;
+    resize:vertical;
+}
+
+.form-row{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.order-summary{
+    margin:23px 0;
+    padding:18px;
+    border-radius:15px;
+    background:#faf8f2;
+}
+
+.summary-row{
+    display:flex;
+    justify-content:space-between;
+    margin-bottom:9px;
+    color:#77796f;
+}
+
+.summary-total{
+    border-top:1px solid #e4dfd3;
+    padding-top:12px;
+    margin-bottom:0;
+    color:#30332c;
+    font-size:17px;
+}
+
+.confirm-order{
+    width:100%;
+    border:0;
+    padding:16px;
+    border-radius:30px;
+    background:#3f4935;
+    color:#fff;
+    font-size:14px;
+    transition:.3s;
+}
+
+.confirm-order:hover{
+    background:#59634a;
+}
+
+/* CONTACT */
+
+.contact-section{
+    padding:90px 20px;
+    text-align:center;
+    background:#3f4935;
+    color:#fff;
+}
+
+.contact-section > span{
+    font-size:10px;
+    letter-spacing:4px;
+    color:rgba(255,255,255,.65);
+}
+
+.contact-section h2{
+    font-family:Georgia,serif;
+    font-size:42px;
+    margin:10px 0;
+}
+
+.contact-section p{
+    max-width:500px;
+    margin:15px auto 28px;
+    line-height:2;
+    color:#f5f0e6;
+}
+
+.contact-whatsapp{
+    display:inline-block;
+    padding:14px 25px;
+    border-radius:30px;
+    background:#fff;
+    color:#3f4935;
+}
+
+.contact-socials{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:18px;
+    margin-top:25px;
+}
+
+.contact-social{
+    width:52px;
+    height:52px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border-radius:50%;
+    background:#fff;
+    color:#3f4935;
+    text-decoration:none;
+}
+
+.contact-social svg{
+    width:26px;
+    height:26px;
+    fill:currentColor;
+}
+~/vanilla-cosmetics $ sed -n '1020,1065p' index.html                                                
+    <div class="contact-socials">                                                                       <a class="contact-social"                            href="https://www.facebook.com/share/1LNyJ5Bdtn/"                                                   target="_blank"
+       rel="noopener noreferrer"                         aria-label="Facebook">
+                                                          <svg viewBox="0 0 24 24" aria-hidden="true">                                                            <path d="M14 8h3V4h-3c-3.3 0-5 1.7-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1z"/>               </svg>
+                                                      </a>                                                                                                <a class="contact-social"
+       href="https://wa.me/213798949861"                 target="_blank"
+       rel="noopener noreferrer"                         aria-label="WhatsApp">
+                                                          <svg viewBox="0 0 24 24" aria-hidden="true">                                                            <path d="M12 2a10 10 0 0 0-8.66 15L2 22l5.15-1.32A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.08-1.12l-.29-.17-3.06.78.82-2.98-.19-.3A8 8 0 1 1 12 20zm4.37-5.91c-.24-.12-1.43-.71-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.73-.65-1.22-1.45-1.36-1.69-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.31-.74-1.8-.2-.48-.4-.42-.54-.43h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.09 3.62.57.25 1.02.4 1.37.51.58.18 1.1.15 1.51.09.46-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/>
+        </svg>                                    
+    </a>                                          
+</div>                                                                                              </section>                                        
+
+<!-- ================= COPYRIGHT ================= -->                                              
+<footer class="copyright">
+
+    <p>
+        © 2026 Vanilla Cosmetics — جميع الحقوق محفوظة.                                                  </p>
+                                                  </footer>
+
+                                                  <!-- ================= CART OVERLAY ================= -->                                           
+<div
+~/vanilla-cosmetics $
+
+/* COPYRIGHT */
+
+.copyright{
+    background:#3f4935;
+    color:#f5f0e6;
+    text-align:center;
+    padding:20px 15px;
+    font-size:12px;
+}
+
+@media(max-width:600px){
+
+    .products-section,
+    .order-section{
+        padding:75px 15px;
+    }
+
+    .section-heading h2{
+        font-size:35px;
+    }
+
+    .form-row{
+        grid-template-columns:1fr;
+        gap:0;
+    }
+
+    .order-box{
+        padding:21px;
+    }
+
+    .product-info{
+        padding:20px;
+    }
+}</style>
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+
+<header class="header">
+
+    <button class="icon-button" id="menuBtn">
+        ☰
+    </button>
+
+    <div class="logo">
+        <span>Vanilla</span>
+        <small>Cosmetics</small>
+    </div>
+
+    <button class="icon-button" id="cartBtn">
+        🛍
+        <span class="cart-count" id="cartCount">0</span>
+    </button>
+
+</header>
+
+
+<!-- ================= SIDE MENU ================= -->
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="side-menu" id="sideMenu">
+
+    <button class="close-menu" id="closeMenu">
+        ×
+    </button>
+
+    <div class="side-logo">
+        Vanilla Cosmetics
+    </div>
+
+    <nav>
+
+        <a href="#home">
+            01 — الرئيسية
+        </a>
+
+        <a href="#products">
+            02 — المنتجات
+        </a>
+
+        <a href="#order">
+            03 — الطلب
+        </a>
+
+        <a href="#contact">
+            04 — تواصل معنا
+        </a>
+
+    </nav>
+
+</aside>
+
+
+<!-- ================= HOME ================= -->
+
+<section class="hero" id="home">
+
+    <div class="hero-content">
+
+        <p class="eyebrow">
+            BEAUTY • CARE • CONFIDENCE
+        </p>
+
+        <h1>
+            Vanilla<br>
+            <span>Cosmetics</span>
+        </h1>
+
+        <p class="hero-text">
+            اكتشفي منتجات العناية والجمال المختارة بعناية
+            لتمنحك لمسة من الأناقة والثقة كل يوم.
+        </p>
+
+        <a href="#products" class="main-btn">
+            تسوقي الآن ←
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= PRODUCTS ================= -->
+
+<section class="products-section" id="products">
+
+    <div class="section-heading">
+
+        <span>
+            OUR COLLECTION
+        </span>
+
+        <h2>
+            منتجاتنا
+        </h2>
+
+        <p>
+            اختاري منتجك المفضل وأضيفيه إلى السلة
+        </p>
+
+    </div>
+
+
+    <div class="products-container">
+
+
+        <!-- PRODUCT 1 -->
+
+        <article class="product-card">
+
+            <div class="product-image">
+
+                <img
+                    src="images/Snow.jpg"
+                    alt="Snow Bleach"
+                    onerror="this.src='https://placehold.co/600x600/f5f0e6/59634a?text=Snow+Bleach'"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    BODY CARE
+                </span>
+
+                <h3>
+                    Snow Bleach
+                </h3>
+
+                <p>
+                    منتج للعناية بمظهر البشرة وتفتيح المناطق الحساسة.
+                </p>
+
+                <div class="product-bottom">
+
+                    <div class="product-price">
+                        310 <small>دج</small>
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        data-id="1"
+                        data-name="Snow Bleach - تبييض المناطق الحساسة"
+                        data-price="310">
+
+                        أضف إلى السلة
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- PRODUCT 2 -->
+
+        <article class="product-card">
+
+            <div class="product-image">
+
+                <img
+                    src="images/Adv.jpg"
+                    alt="ACM Dépiwhite Advanced"
+                    onerror="this.src='https://placehold.co/600x600/f5f0e6/59634a?text=ACM+Depiwhite'"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    SKIN CARE
+                </span>
+
+                <h3>
+                    ACM — Dépiwhite Advanced
+                </h3>
+
+                <p>
+                    منتج مخصص للعناية بالبشرة وتوحيد مظهر لونها.
+                </p>
+
+                <div class="product-bottom">
+
+                    <div class="product-price">
+                        410 <small>دج</small>
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        data-id="2"
+                        data-name="ACM - Dépiwhite Advanced"
+                        data-price="410">
+
+                        أضف إلى السلة
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- PRODUCT 3 -->
+
+        <article class="product-card">
+
+            <div class="product-image">
+
+                <img
+                    src="images/Gel.jpeg"
+                    alt="Touchè Gel Nettoyant Purifiant Visage"
+                    onerror="this.src='https://placehold.co/600x600/f5f0e6/59634a?text=Touche+Gel'"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    FACE CARE
+                </span>
+
+                <h3>
+                    Touchè — Gel Nettoyant Purifiant Visage
+                </h3>
+
+                <p>
+                    جل منظف للوجه للاستخدام ضمن روتين العناية اليومية.
+                </p>
+
+                <div class="product-bottom">
+
+                    <div class="product-price">
+                        360 <small>دج</small>
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        data-id="3"
+                        data-name="Touchè - Gel Nettoyant Purifiant Visage"
+                        data-price="360">
+
+                        أضف إلى السلة
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+        <!-- PRODUCT 4 -->
+
+        <article class="product-card">
+
+            <div class="product-image">
+
+                <img
+                    src="images/Vitac.jpeg"
+                    alt="Touchè Vitamine C 11%"
+                    onerror="this.src='https://placehold.co/600x600/f5f0e6/59634a?text=Vitamine+C'"
+                >
+
+            </div>
+
+            <div class="product-info">
+
+                <span class="product-category">
+                    FACE CARE
+                </span>
+
+                <h3>
+                    Touchè — Vitamine C 11%
+                </h3>
+
+                <p>
+                    منتج يحتوي على فيتامين C بنسبة 11% ضمن روتين العناية بالبشرة.
+                </p>
+
+                <div class="product-bottom">
+
+                    <div class="product-price">
+                        210 <small>دج</small>
+                    </div>
+
+                    <button
+                        class="add-cart"
+                        data-id="4"
+                        data-name="Touchè - Vitamine C 11%"
+                        data-price="210">
+
+                        أضف إلى السلة
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================= ORDER ================= -->
+
+<section class="order-section" id="order">
+
+    <div class="section-heading">
+
+        <span>
+            YOUR ORDER
+        </span>
+
+        <h2>
+            تأكيد الطلب
+        </h2>
+
+        <p>
+            أدخلي معلوماتك لإتمام الطلب.
+        </p>
+
+    </div>
+
+
+    <div class="order-box">
+
+        <form id="orderForm">
+
+            <div class="form-group">
+
+                <label>
+                    الاسم واللقب
+                </label>
+
+                <input
+                    id="customerName"
+                    type="text"
+                    placeholder="الاسم الكامل"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    رقم الهاتف
+                </label>
+
+                <input
+                    id="customerPhone"
+                    type="tel"
+                    placeholder="05XXXXXXXX"
+                    required
+                >
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        الولاية
+                    </label>
+
+                    <input
+                        id="wilaya"
+                        type="text"
+                        placeholder="الولاية"
+                        required
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        البلدية
+                    </label>
+
+                    <input
+                        id="commune"
+                        type="text"
+                        placeholder="البلدية"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    العنوان
+                </label>
+
+                <textarea
+                    id="address"
+                    placeholder="العنوان بالتفصيل"
+                    required
+                ></textarea>
+
+            </div>
+
+
+            <div class="order-summary">
+
+                <div class="summary-row">
+
+                    <span>
+                        عدد المنتجات
+                    </span>
+
+                    <strong id="summaryItems">
+                        0
+                    </strong>
+
+                </div>
+
+
+                <div class="summary-row summary-total">
+
+                    <span>
+                        المجموع
+                    </span>
+
+                    <strong>
+                        <span id="summaryTotal">0</span>
+                        دج
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <button
+                class="confirm-order"
+                type="submit">
+
+                تأكيد الطلب عبر WhatsApp
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section><!-- ================= CONTACT ================= -->
+
+<section class="contact-section" id="contact">
+
+    <span>
+        CONTACT US
+    </span>
+
+    <h2>
+        تواصل معنا
+    </h2>
+
+    <p>
+        للاستفسار أو المساعدة في اختيار المنتج المناسب،
+        تواصلي معنا مباشرة عبر WhatsApp.
+    </p>
+
+    <div class="contact-socials">
+
+    <a class="contact-social"
+       href="https://www.facebook.com/share/1LNyJ5Bdtn/"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="Facebook">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M14 8h3V4h-3c-3.3 0-5 1.7-5 5v3H6v4h3v4h4v-4h3l1-4h-4V9c0-.7.3-1 1-1z"/>
+        </svg>
+
+    </a>
+
+    <a class="contact-social"
+       href="https://wa.me/213798949861"
+       target="_blank"
+       rel="noopener noreferrer"
+       aria-label="WhatsApp">
+
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M12 2a10 10 0 0 0-8.66 15L2 22l5.15-1.32A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.08-1.12l-.29-.17-3.06.78.82-2.98-.19-.3A8 8 0 1 1 12 20zm4.37-5.91c-.24-.12-1.43-.71-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.03-.38-1.96-1.21-.73-.65-1.22-1.45-1.36-1.69-.14-.24-.01-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.31-.74-1.8-.2-.48-.4-.42-.54-.43h-.46c-.16 0-.42.06-.64.3-.22.24-.84.82-.84 2s.86 2.32.98 2.48c.12.16 1.69 2.58 4.09 3.62.57.25 1.02.4 1.37.51.58.18 1.1.15 1.51.09.46-.07 1.43-.58 1.63-1.14.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28z"/>
+        </svg>
+
+    </a>
+
+</div>
+
+</section>
+
+
+<!-- ================= COPYRIGHT ================= -->
+
+<footer class="copyright">
+
+    <p>
+        © 2026 Vanilla Cosmetics — جميع الحقوق محفوظة.
+    </p>
+
+</footer>
+
+
+<!-- ================= CART OVERLAY ================= -->
+
+<div
+    class="cart-overlay"
+    id="cartOverlay">
+</div>
+
+
+<!-- ================= CART PANEL ================= -->
+
+<aside
+    class="cart-panel"
+    id="cartPanel">
+
+    <div class="cart-header">
+
+        <h2>
+            سلة التسوق
+        </h2>
+
+        <button
+            class="close-cart"
+            id="closeCart">
+
+            ×
+
+        </button>
+
+    </div>
+
+
+    <div
+        class="cart-items"
+        id="cartItems">
+
+        <div class="empty-cart">
+
+            <div class="empty-cart-icon">
+                🛍
+            </div>
+
+            <p>
+                السلة فارغة
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <div class="cart-footer">
+
+        <div class="cart-total">
+
+            <span>
+                المجموع
+            </span>
+
+            <strong>
+
+                <span id="cartTotal">
+                    0
+                </span>
+
+                دج
+
+            </strong>
+
+        </div>
+
+
+        <button
+            class="checkout-btn"
+            id="checkoutBtn">
+
+            متابعة الطلب ←
+
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- ================= WHATSAPP FLOAT ================= -->
+
+<a
+    href="https://wa.me/213798949861"
+    target="_blank"
+    aria-label="WhatsApp"
+    class="whatsapp-float"
+    style="
+        position:fixed;
+        right:18px;
+        bottom:18px;
+        width:58px;
+        height:58px;
+        background:#25D366;
+        border-radius:50%;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+        z-index:999999;
+        text-decoration:none;
+        box-shadow:0 5px 18px rgba(0,0,0,.25);
+    ">
+
+    <svg
+        viewBox="0 0 32 32"
+        width="34"
+        height="34"
+        style="width:34px;height:34px;display:block;fill:white;">
+
+        <path d="M16 3C8.82 3 3 8.82 3 16c0 2.3.6 4.46 1.75 6.35L3 29l6.83-1.7A12.94 12.94 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3zm0 23.6c-1.97 0-3.9-.53-5.58-1.54l-.4-.24-4.05 1.01 1.08-3.94-.26-.41A10.55 10.55 0 1 1 16 26.6zm5.8-7.9c-.32-.16-1.88-.93-2.17-1.04-.29-.11-.5-.16-.71.16-.21.31-.81 1.04-.99 1.25-.18.21-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53-.92-.82-1.54-1.83-1.72-2.14-.18-.31-.02-.48.14-.64.14-.14.31-.36.47-.54.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.55-.08-.16-.71-1.72-.97-2.36-.26-.63-.52-.55-.71-.56h-.6c-.21 0-.55.08-.84.39-.29.31-1.1 1.07-1.1 2.61s1.13 3.03 1.29 3.24c.16.21 2.22 3.39 5.38 4.75.75.32 1.34.51 1.8.65.76.24 1.45.21 2 .13.61-.09 1.88-.77 2.15-1.51.27-.74.27-1.38.19-1.51-.08-.13-.29-.21-.61-.37z"/>
+
+    </svg>
+
+</a>
+
+
+<!-- ================= TOAST ================= -->
+
+<div
+    class="toast"
+    id="toast">
+</div>
+
+
+<style>
+
+/* CART */
+
+.cart-overlay{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.45);
+    opacity:0;
+    visibility:hidden;
+    transition:.3s;
+    z-index:2100;
+}
+
+.cart-overlay.active{
+    opacity:1;
+    visibility:visible;
+}
+
+.cart-panel{
+    position:fixed;
+    top:0;
+    right:-430px;
+    width:min(410px,92vw);
+    height:100vh;
+    background:#fff;
+    z-index:2200;
+    transition:.35s;
+    display:flex;
+    flex-direction:column;
+    box-shadow:-10px 0 35px rgba(0,0,0,.12);
+}
+
+.cart-panel.active{
+    right:0;
+}
+
+.cart-header{
+    padding:20px;
+    border-bottom:1px solid #e4dfd3;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.cart-header h2{
+    font-size:20px;
+    color:#3f4935;
+}
+
+.close-cart{
+    width:40px;
+    height:40px;
+    border:0;
+    border-radius:50%;
+    background:#f5f0e6;
+    color:#3f4935;
+    font-size:23px;
+}
+
+.cart-items{
+    flex:1;
+    overflow-y:auto;
+    padding:10px 20px;
+}
+
+.empty-cart{
+    min-height:280px;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+    color:#77796f;
+}
+
+.empty-cart-icon{
+    font-size:48px;
+}
+
+.cart-item{
+    padding:17px 0;
+    border-bottom:1px solid #e4dfd3;
+    display:flex;
+    gap:10px;
+    align-items:center;
+}
+
+.cart-item-info{
+    flex:1;
+}
+
+.cart-item-name{
+    font-size:14px;
+    font-weight:bold;
+    margin-bottom:5px;
+}
+
+.cart-item-price{
+    font-size:13px;
+}
+.cart-footer{
+    flex-shrink:0;
+    padding:20px;
+    background:#fff;
+    border-top:1px solid #e4dfd3;
+}
+
+.cart-total{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    font-size:18px;
+    font-weight:bold;
+    color:#3f4935;
+    margin-bottom:16px;
+}
+
+.cart-total strong{
+    font-size:21px;
+}
+
+.checkout-btn{
+    display:block;
+    width:100%;
+    min-height:58px;
+    border:0;
+    border-radius:14px;
+    background:#3f4935;
+    color:#fff;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+}
+</style>
+
+<script>
+
+/* ================= DATA ================= */
+
+const WHATSAPP_NUMBER = "213798949861";
+
+let cart = JSON.parse(localStorage.getItem("vanillaCart")) || [];
+
+
+/* ================= ELEMENTS ================= */
+
+const menuBtn = document.getElementById("menuBtn");
+const closeMenu = document.getElementById("closeMenu");
+const sideMenu = document.getElementById("sideMenu");
+const overlay = document.getElementById("overlay");
+
+const cartBtn = document.getElementById("cartBtn");
+const closeCart = document.getElementById("closeCart");
+const cartPanel = document.getElementById("cartPanel");
+const cartOverlay = document.getElementById("cartOverlay");
+
+const cartItems = document.getElementById("cartItems");
+const cartCount = document.getElementById("cartCount");
+const cartTotal = document.getElementById("cartTotal");
+
+const checkoutBtn = document.getElementById("checkoutBtn");
+
+const summaryItems = document.getElementById("summaryItems");
+const summaryTotal = document.getElementById("summaryTotal");
+
+const orderForm = document.getElementById("orderForm");
+
+const toast = document.getElementById("toast");
+
+
+/* ================= MENU ================= */
+
+function openMenu(){
+
+    sideMenu.classList.add("active");
+    overlay.classList.add("active");
+
+}
+
+function closeSideMenu(){
+
+    sideMenu.classList.remove("active");
+    overlay.classList.remove("active");
+
+}
+
+menuBtn.addEventListener("click", openMenu);
+
+closeMenu.addEventListener("click", closeSideMenu);
+
+overlay.addEventListener("click", closeSideMenu);
+
+
+/* ================= CART ================= */
+
+function openCart(){
+
+    cartPanel.classList.add("active");
+    cartOverlay.classList.add("active");
+
+}
+
+function closeCartPanel(){
+
+    cartPanel.classList.remove("active");
+    cartOverlay.classList.remove("active");
+
+}
+
+cartBtn.addEventListener("click", openCart);
+
+closeCart.addEventListener("click", closeCartPanel);
+
+cartOverlay.addEventListener("click", closeCartPanel);
+
+
+/* ================= ADD TO CART ================= */
+
+document.querySelectorAll(".add-cart").forEach(button => {
+
+    button.addEventListener("click", function(){
+
+        const id = this.dataset.id;
+        const name = this.dataset.name;
+        const price = Number(this.dataset.price);
+
+        const existing = cart.find(item => item.id === id);
+
+        if(existing){
+            existing.quantity++;
+        }else{
+            cart.push({
+                id: id,
+                name: name,
+                price: price,
+                quantity: 1
+            });
+        }
+
+        saveCart();
+        renderCart();
+        showToast("تمت إضافة المنتج إلى السلة ✓");
+
+    });
+
+});
+
+
+/* ================= SAVE ================= */
+
+function saveCart(){
+
+    localStorage.setItem(
+        "vanillaCart",
+        JSON.stringify(cart)
+    );
+
+}
+
+
+/* ================= RENDER CART ================= */
+
+function renderCart(){
+
+    let total = 0;
+    let itemsCount = 0;
+
+    cartItems.innerHTML = "";
+
+    if(cart.length === 0){
+
+        cartItems.innerHTML = `
+
+            <div class="empty-cart">
+
+                <div class="empty-cart-icon">
+                    🛍
+                </div>
+
+                <p>السلة فارغة</p>
+
+            </div>
+
+        `;
+
+    }
+
+    cart.forEach(item => {
+
+        total += item.price * item.quantity;
+        itemsCount += item.quantity;
+
+        const itemElement = document.createElement("div");
+
+        itemElement.className = "cart-item";
+
+        itemElement.innerHTML = `
+
+            <div class="cart-item-info">
+
+                <div class="cart-item-name">
+                    ${item.name}
+                </div>
+
+                <div class="cart-item-price">
+                    ${item.price} دج
+                </div>
+
+                <div class="cart-item-total">
+                    المجموع: ${item.price * item.quantity} دج
+                </div>
+
+                <div class="quantity">
+
+                    <button onclick="changeQuantity('${item.id}', -1)">
+                        −
+                    </button>
+
+                    <span>${item.quantity}</span>
+
+                    <button onclick="changeQuantity('${item.id}', 1)">
+                        +
+                    </button>
+
+                </div>
+
+            </div>
+
+            <button
+                class="remove-item"
+                onclick="removeItem('${item.id}')">
+                ×
+            </button>
+
+        `;
+
+        cartItems.appendChild(itemElement);
+
+    });
+
+    cartCount.textContent = itemsCount;
+    cartTotal.textContent = total;
+    summaryItems.textContent = itemsCount;
+    summaryTotal.textContent = total;
+
+}
+
+
+/* ================= QUANTITY ================= */
+
+function changeQuantity(id, amount){
+
+    const item = cart.find(item => item.id === id);
+
+    if(!item) return;
+
+    item.quantity += amount;
+
+    if(item.quantity <= 0){
+
+        cart = cart.filter(item => item.id !== id);
+
+    }
+
+    saveCart();
+    renderCart();
+
+}
+
+
+/* ================= REMOVE ================= */
+
+function removeItem(id){
+
+    cart = cart.filter(item => item.id !== id);
+
+    saveCart();
+    renderCart();
+
+    showToast("تم حذف المنتج من السلة");
+
+}
+
+
+/* ================= CHECKOUT ================= */
+
+checkoutBtn.addEventListener("click", function(){
+
+    if(cart.length === 0){
+
+        showToast("السلة فارغة");
+
+        return;
+
+    }
+
+    closeCartPanel();
+
+    document.getElementById("order").scrollIntoView({
+        behavior:"smooth"
+    });
+
+    showToast("أكملي معلومات الطلب");
+
+});
+
+
+/* ================= ORDER ================= */
+
+orderForm.addEventListener("submit", function(event){
+
+    event.preventDefault();
+
+    if(cart.length === 0){
+
+        showToast("أضيفي منتجاً إلى السلة أولاً");
+
+        return;
+
+    }
+
+    const name =
+        document.getElementById("customerName").value.trim();
+
+    const phone =
+        document.getElementById("customerPhone").value.trim();
+
+    const wilaya =
+        document.getElementById("wilaya").value.trim();
+
+    const commune =
+        document.getElementById("commune").value.trim();
+
+    const address =
+        document.getElementById("address").value.trim();
+
+    let message =
+        "🌿 *طلب جديد - Vanilla Cosmetics*%0A%0A";
+
+    message +=
+        "👤 الاسم: " +
+        encodeURIComponent(name) +
+        "%0A";
+
+    message +=
+        "📞 الهاتف: " +
+        encodeURIComponent(phone) +
+        "%0A";
+
+    message +=
+        "📍 الولاية: " +
+        encodeURIComponent(wilaya) +
+        "%0A";
+
+    message +=
+        "🏘️ البلدية: " +
+        encodeURIComponent(commune) +
+        "%0A";
+
+    message +=
+        "🏠 العنوان: " +
+        encodeURIComponent(address) +
+        "%0A%0A";
+
+    message += "🛍️ *المنتجات:*%0A";
+
+    let total = 0;
+
+    cart.forEach(item => {
+
+        const itemTotal = item.price * item.quantity;
+
+        total += itemTotal;
+
+        message +=
+            "• " +
+            encodeURIComponent(item.name) +
+            " × " +
+            item.quantity +
+            " = " +
+            itemTotal +
+            " دج%0A";
+
+    });
+
+    message +=
+        "%0A💰 *المجموع: " +
+        total +
+        " دج*";
+
+    const whatsappURL =
+        "https://wa.me/" +
+        WHATSAPP_NUMBER +
+        "?text=" +
+        message;
+
+    window.open(
+        whatsappURL,
+        "_blank"
+    );
+
+});
+
+
+/* ================= TOAST ================= */
+
+function showToast(message){
+
+    toast.textContent = message;
+
+    toast.classList.add("show");
+
+    setTimeout(() => {
+
+        toast.classList.remove("show");
+
+    }, 2500);
+
+}
+
+
+/* ================= MENU LINKS ================= */
+
+document
+    .querySelectorAll(".side-menu a")
+    .forEach(link => {
+
+        link.addEventListener("click", () => {
+
+            closeSideMenu();
+
+        });
+
+    });
+
+
+/* ================= START ================= */
+
+renderCart();
+
+</script>
+
+</body>
+</html>

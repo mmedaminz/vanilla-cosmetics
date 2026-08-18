@@ -1,0 +1,1570 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vanilla Cosmetics</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;1,500&display=swap');
+
+:root{
+--olive:#59634a;
+--dark:#3f4935;
+--light:#788267;
+--beige:#f5f0e6;
+--cream:#faf8f2;
+--text:#30332c;
+--muted:#77796f;
+--white:#fff;
+--border:#e4dfd3;
+--wa:#25D366;
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+
+html{scroll-behavior:smooth}
+
+body{
+background:var(--cream);
+color:var(--text);
+font-family:"Cairo",sans-serif;
+}
+
+button,input,textarea{font-family:inherit}
+button{cursor:pointer}
+a{text-decoration:none;color:inherit}
+
+/* HEADER */
+
+.header{
+position:fixed;
+top:0;
+right:0;
+left:0;
+height:72px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 20px;
+background:rgba(250,248,242,.96);
+backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);
+z-index:1000;
+}
+
+.logo{
+text-align:center;
+line-height:1;
+}
+
+.logo span{
+display:block;
+font-family:"Playfair Display",serif;
+font-size:27px;
+color:var(--dark);
+}
+
+.logo small{
+display:block;
+margin-top:5px;
+font-family:"Playfair Display",serif;
+font-size:10px;
+letter-spacing:3px;
+color:var(--light);
+}
+
+.icon-button{
+width:44px;
+height:44px;
+border:0;
+border-radius:50%;
+background:var(--beige);
+color:var(--dark);
+font-size:20px;
+display:flex;
+align-items:center;
+justify-content:center;
+position:relative;
+}
+
+.cart-count{
+position:absolute;
+top:-4px;
+right:-4px;
+width:21px;
+height:21px;
+border-radius:50%;
+background:var(--dark);
+color:white;
+font-size:11px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+/* MENU */
+
+.overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.4);
+opacity:0;
+visibility:hidden;
+transition:.3s;
+z-index:1500;
+}
+
+.overlay.active{
+opacity:1;
+visibility:visible;
+}
+
+.side-menu{
+position:fixed;
+top:0;
+right:-330px;
+width:310px;
+height:100vh;
+padding:85px 28px;
+background:var(--dark);
+color:white;
+z-index:2000;
+transition:.35s;
+border-radius:0 0 0 28px;
+}
+
+.side-menu.active{right:0}
+
+.close-menu{
+position:absolute;
+top:20px;
+left:20px;
+width:42px;
+height:42px;
+border:1px solid rgba(255,255,255,.3);
+border-radius:50%;
+background:transparent;
+color:white;
+font-size:22px;
+}
+
+.side-logo{
+font-family:"Playfair Display",serif;
+font-size:28px;
+margin-bottom:45px;
+}
+
+.side-menu a{
+display:block;
+padding:18px 0;
+border-bottom:1px solid rgba(255,255,255,.15);
+}
+
+/* HERO */
+
+.hero{
+min-height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:110px 20px 60px;
+background:
+radial-gradient(circle at 20% 20%,rgba(89,99,74,.12),transparent 35%),
+radial-gradient(circle at 80% 80%,rgba(214,205,184,.4),transparent 35%),
+var(--cream);
+}
+
+.hero-content{max-width:650px}
+
+.eyebrow{
+font-size:10px;
+letter-spacing:4px;
+color:var(--light);
+margin-bottom:20px;
+}
+
+.hero h1{
+font-family:"Playfair Display",serif;
+font-size:clamp(60px,15vw,105px);
+line-height:.85;
+color:var(--dark);
+}
+
+.hero h1 span{
+font-style:italic;
+font-size:.55em;
+color:var(--light);
+}
+
+.hero-text{
+max-width:500px;
+margin:35px auto;
+color:var(--muted);
+line-height:2;
+}
+
+.main-btn{
+display:inline-flex;
+align-items:center;
+gap:10px;
+padding:15px 30px;
+border-radius:30px;
+background:var(--dark);
+color:white;
+transition:.3s;
+}
+
+.main-btn:hover{transform:translateY(-3px)}
+
+/* SECTIONS */
+
+.products-section,
+.order-section{
+padding:90px 18px;
+}
+
+.order-section{background:var(--beige)}
+
+.section-heading{
+max-width:650px;
+margin:0 auto 45px;
+text-align:center;
+}
+
+.section-heading span{
+font-size:10px;
+letter-spacing:4px;
+color:var(--light);
+}
+
+.section-heading h2{
+font-family:"Playfair Display",serif;
+font-size:42px;
+color:var(--dark);
+margin:10px 0;
+}
+
+.section-heading p{color:var(--muted)}
+
+/* PRODUCTS */
+
+.products-container{
+max-width:600px;
+margin:auto;
+display:flex;
+flex-direction:column;
+gap:25px;
+}
+
+.product-card{
+background:white;
+border:1px solid var(--border);
+border-radius:24px;
+overflow:hidden;
+box-shadow:0 10px 30px rgba(50,50,40,.05);
+}
+
+.product-image{
+aspect-ratio:1/1;
+background:var(--beige);
+overflow:hidden;
+}
+
+.product-image img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+}
+
+.product-info{padding:23px}
+
+.product-category{
+font-size:9px;
+letter-spacing:2px;
+color:var(--light);
+}
+
+.product-info h3{
+font-size:21px;
+margin:8px 0;
+}
+
+.product-info p{
+font-size:13px;
+line-height:1.9;
+color:var(--muted);
+margin-bottom:18px;
+}
+
+.product-bottom{
+display:flex;
+align-items:center;
+justify-content:space-between;
+gap:10px;
+}
+
+.product-price{
+font-size:20px;
+font-weight:700;
+color:var(--dark);
+white-space:nowrap;
+}
+
+.product-price small{font-size:11px}
+
+.add-cart{
+border:0;
+border-radius:25px;
+padding:11px 16px;
+background:var(--dark);
+color:white;
+font-size:12px;
+transition:.25s;
+}
+
+.add-cart:hover{
+background:var(--olive);
+transform:translateY(-2px);
+}
+
+/* ORDER */
+
+.order-box{
+max-width:600px;
+margin:auto;
+background:white;
+padding:28px;
+border-radius:25px;
+border:1px solid var(--border);
+}
+
+.form-group{margin-bottom:17px}
+
+.form-group label{
+display:block;
+font-size:13px;
+font-weight:600;
+margin-bottom:7px;
+}
+
+input,textarea{
+width:100%;
+border:1px solid var(--border);
+background:var(--cream);
+border-radius:12px;
+padding:14px;
+outline:none;
+font-size:14px;
+color:var(--text);
+}
+
+input:focus,textarea:focus{
+border-color:var(--olive);
+}
+
+textarea{
+height:95px;
+resize:vertical;
+}
+
+.form-row{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:14px;
+}
+
+.order-summary{
+margin:23px 0;
+padding:18px;
+border-radius:15px;
+background:var(--cream);
+}
+
+.summary-row{
+display:flex;
+justify-content:space-between;
+margin-bottom:8px;
+color:var(--muted);
+}
+
+.summary-total{
+border-top:1px solid var(--border);
+padding-top:12px;
+font-size:17px;
+color:var(--text);
+}
+
+.confirm-order{
+width:100%;
+border:0;
+padding:16px;
+border-radius:30px;
+background:var(--dark);
+color:white;
+font-size:15px;
+transition:.3s;
+}
+
+.confirm-order:hover{background:var(--olive)}
+
+/* CONTACT */
+
+.contact-section{
+padding:90px 20px;
+text-align:center;
+background:var(--dark);
+color:white;
+}
+
+.contact-section h2{
+font-family:"Playfair Display",serif;
+font-size:42px;
+margin:10px 0;
+}
+
+.contact-section p{
+max-width:500px;
+margin:15px auto 28px;
+line-height:2;
+color:rgba(255,255,255,.7);
+}
+
+.contact-whatsapp{
+display:inline-flex;
+align-items:center;
+gap:10px;
+padding:14px 25px;
+border-radius:30px;
+background:white;
+color:var(--dark);
+}
+
+/* COPYRIGHT */
+
+.copyright{
+background:#353d2d;
+color:rgba(255,255,255,.65);
+text-align:center;
+padding:20px 15px;
+font-size:12px;
+border-top:1px solid rgba(255,255,255,.1);
+}
+
+.copyright p{margin:0}
+
+/* CART OVERLAY */
+
+.cart-overlay{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.45);
+opacity:0;
+visibility:hidden;
+transition:.3s;
+z-index:2100;
+}
+
+.cart-overlay.active{
+opacity:1;
+visibility:visible;
+}
+
+/* CART PANEL */
+
+.cart-panel{
+position:fixed;
+top:0;
+right:-430px;
+width:min(410px,92vw);
+height:100vh;
+background:#fff;
+z-index:2200;
+transition:.35s;
+display:flex;
+flex-direction:column;
+box-shadow:-10px 0 35px rgba(0,0,0,.12);
+}
+
+.cart-panel.active{
+right:0;
+}
+
+.cart-header{
+padding:20px;
+border-bottom:1px solid var(--border);
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.cart-header h2{
+font-size:20px;
+color:var(--dark);
+}
+
+.close-cart{
+width:40px;
+height:40px;
+border:0;
+border-radius:50%;
+background:var(--beige);
+color:var(--dark);
+font-size:22px;
+}
+
+/* CART ITEMS */
+
+.cart-items{
+flex:1;
+overflow-y:auto;
+padding:12px 20px;
+}
+
+.empty-cart{
+min-height:280px;
+display:flex;
+flex-direction:column;
+align-items:center;
+justify-content:center;
+gap:12px;
+color:var(--muted);
+}
+
+.empty-cart-icon{
+font-size:48px;
+color:var(--light);
+}
+
+.cart-item{
+padding:17px 0;
+border-bottom:1px solid var(--border);
+display:flex;
+gap:13px;
+align-items:center;
+}
+
+.cart-item-info{
+flex:1;
+min-width:0;
+}
+
+.cart-item-name{
+font-weight:600;
+font-size:14px;
+margin-bottom:5px;
+}
+
+.cart-item-price{
+font-size:13px;
+color:var(--dark);
+}
+
+.cart-item-total{
+font-size:12px;
+color:var(--muted);
+margin-top:3px;
+}
+
+.quantity{
+display:flex;
+align-items:center;
+gap:9px;
+margin-top:10px;
+}
+
+.quantity button{
+width:29px;
+height:29px;
+border:1px solid var(--border);
+border-radius:50%;
+background:var(--cream);
+color:var(--dark);
+font-size:16px;
+}
+
+.quantity span{
+min-width:18px;
+text-align:center;
+font-size:13px;
+}
+
+.remove-item{
+border:0;
+background:transparent;
+font-size:18px;
+color:#a65d5d;
+padding:5px;
+}
+
+/* CART FOOTER */
+
+.cart-footer{
+padding:20px;
+border-top:1px solid var(--border);
+background:#fff;
+}
+
+.cart-total{
+display:flex;
+justify-content:space-between;
+font-size:18px;
+margin-bottom:15px;
+}
+
+.cart-total strong{
+color:var(--dark);
+}
+
+.checkout-btn{
+width:100%;
+border:0;
+padding:15px;
+border-radius:30px;
+background:var(--dark);
+color:white;
+font-size:14px;
+transition:.3s;
+}
+
+.checkout-btn:hover{
+background:var(--olive);
+}
+
+/* WHATSAPP */
+
+.whatsapp-float{
+position:fixed;
+right:20px;
+bottom:20px;
+width:58px;
+height:58px;
+border-radius:50%;
+background:var(--wa);
+color:white;
+display:flex;
+align-items:center;
+justify-content:center;
+z-index:1400;
+box-shadow:0 6px 20px rgba(0,0,0,.22);
+transition:.3s;
+}
+
+.whatsapp-float:hover{transform:scale(1.08)}
+
+.whatsapp-svg{
+width:34px;
+height:34px;
+fill:white;
+}
+
+/* TOAST */
+
+.toast{
+position:fixed;
+right:20px;
+bottom:92px;
+background:var(--dark);
+color:white;
+padding:13px 20px;
+border-radius:30px;
+font-size:13px;
+opacity:0;
+visibility:hidden;
+transform:translateY(15px);
+transition:.3s;
+z-index:3000;
+}
+
+.toast.show{
+opacity:1;
+visibility:visible;
+transform:translateY(0);
+}
+
+/* MOBILE */
+
+@media(max-width:600px){
+
+.header{
+height:68px;
+padding:0 15px;
+}
+
+.logo span{font-size:23px}
+
+.hero h1{font-size:68px}
+
+.products-section,
+.order-section{
+padding:75px 15px;
+}
+
+.section-heading h2{
+font-size:35px;
+}
+
+.form-row{
+grid-template-columns:1fr;
+gap:0;
+}
+
+.order-box{
+padding:21px;
+}
+
+.product-info{
+padding:20px;
+}
+
+.product-bottom{
+align-items:flex-end;
+}
+
+.add-cart{
+padding:10px 12px;
+}
+
+.side-menu{
+width:290px;
+}
+
+.whatsapp-float{
+right:16px;
+bottom:18px;
+width:56px;
+height:56px;
+}
+
+.cart-panel{
+width:92vw;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="header">
+
+<button class="icon-button" id="menuBtn">☰</button>
+
+<div class="logo">
+<span>Vanilla</span>
+<small>Cosmetics</small>
+</div>
+
+<button class="icon-button" id="cartBtn">
+🛍
+<span class="cart-count" id="cartCount">0</span>
+</button>
+
+</header>
+
+
+<div class="overlay" id="overlay"></div>
+
+<aside class="side-menu" id="sideMenu">
+
+<button class="close-menu" id="closeMenu">×</button>
+
+<div class="side-logo">Vanilla Cosmetics</div>
+
+<a href="#home">01 — الرئيسية</a>
+<a href="#products">02 — المنتجات</a>
+<a href="#order">03 — الطلب</a>
+<a href="#contact">04 — تواصل معنا</a>
+
+</aside>
+
+
+<section class="hero" id="home">
+
+<div class="hero-content">
+
+<p class="eyebrow">BEAUTY • CARE • CONFIDENCE</p>
+
+<h1>
+Vanilla<br>
+<span>Cosmetics</span>
+</h1>
+
+<p class="hero-text">
+اكتشفي منتجات العناية والجمال المختارة بعناية
+لتمنحك لمسة من الأناقة والثقة كل يوم.
+</p>
+
+<a href="#products" class="main-btn">
+تسوقي الآن ←
+</a>
+
+</div>
+
+</section>
+
+
+<section class="products-section" id="products">
+
+<div class="section-heading">
+
+<span>OUR COLLECTION</span>
+
+<h2>منتجاتنا</h2>
+
+<p>اختاري منتجك المفضل وأضيفيه إلى السلة</p>
+
+</div>
+
+
+<div class="products-container">
+
+
+<article class="product-card">
+
+<div class="product-image">
+
+<img src="images/product1.jpg"
+alt="منتج العناية الأول"
+onerror="this.src='https://placehold.co/600x600/f5f0e6/59634a?text=Vanilla+Cosmetics'">
+
+</div>
+
+<div class="product-info">
+
+<span class="product-category">SKIN CARE</span>
+
+<h3>منتج العناية الأول</h3>
+
+<p>عناية يومية تمنح بشرتك مظهراً ناعماً ونضراً.</p>
+
+<div class="product-bottom">
+
+<div class="product-price">
+2500 <small>دج</small>
+</div>
+
+<button class="add-cart"
+data-id="1"
+data-name="منتج العناية الأول"
+data-price="2500">
+أضف إلى السلة
+</button>
+
+</div>
+
+</div>
+</article>
+
+
+<article class="product-card">
+
+<div class="product-image">
+
+<img src="images/product2.jpg"
+alt="منتج العناية الثاني"
+onerror="this.src='https://placehold.co/600x600/f5f0e6/59634a?text=Vanilla+Cosmetics'">
+
+</div>
+
+<div class="product-info">
+
+<span class="product-category">BODY CARE</span>
+
+<h3>منتج العناية الثاني</h3>
+
+<p>لمسة عناية تمنح جسمك إحساساً بالانتعاش والنعومة.</p>
+
+<div class="product-bottom">
+
+<div class="product-price">
+3000 <small>دج</small>
+</div>
+
+<button class="add-cart"
+data-id="2"
+data-name="منتج العناية الثاني"
+data-price="3000">
+أضف إلى السلة
+</button>
+
+</div>
+
+</div>
+</article>
+
+
+<article class="product-card">
+
+<div class="product-image">
+
+<img src="images/product3.jpg"
+alt="منتج الجمال الثالث"
+onerror="this.src='https://placehold.co/600x600/f5f0e6/59634a?text=Vanilla+Cosmetics'">
+
+</div>
+
+<div class="product-info">
+
+<span class="product-category">BEAUTY</span>
+
+<h3>منتج الجمال الثالث</h3>
+
+<p>منتج عملي لإكمال روتين جمالك اليومي.</p>
+
+<div class="product-bottom">
+
+<div class="product-price">
+3500 <small>دج</small>
+</div>
+
+<button class="add-cart"
+data-id="3"
+data-name="منتج الجمال الثالث"
+data-price="3500">
+أضف إلى السلة
+</button>
+
+</div>
+
+</div>
+</article>
+
+
+<article class="product-card">
+
+<div class="product-image">
+
+<img src="images/product4.jpg"
+alt="منتج العناية الرابع"
+onerror="this.src='https://placehold.co/600x600/f5f0e6/59634a?text=Vanilla+Cosmetics'">
+
+</div>
+
+<div class="product-info">
+
+<span class="product-category">PREMIUM CARE</span>
+
+<h3>منتج العناية الرابع</h3>
+
+<p>اختيار مميز لمن يبحث عن عناية أكثر فخامة.</p>
+
+<div class="product-bottom">
+
+<div class="product-price">
+4500 <small>دج</small>
+</div>
+
+<button class="add-cart"
+data-id="4"
+data-name="منتج العناية الرابع"
+data-price="4500">
+أضف إلى السلة
+</button>
+
+</div>
+
+</div>
+</article>
+
+</div>
+
+</section>
+
+
+<section class="order-section" id="order">
+
+<div class="section-heading">
+
+<span>YOUR ORDER</span>
+
+<h2>تأكيد الطلب</h2>
+
+<p>أدخلي معلوماتك لإتمام الطلب.</p>
+
+</div>
+
+
+<div class="order-box">
+
+<form id="orderForm">
+
+<div class="form-group">
+
+<label>الاسم واللقب</label>
+
+<input
+id="customerName"
+type="text"
+placeholder="الاسم الكامل"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>رقم الهاتف</label>
+
+<input
+id="customerPhone"
+type="tel"
+placeholder="0798949861"
+required>
+
+</div>
+
+
+<div class="form-row">
+
+<div class="form-group">
+
+<label>الولاية</label>
+
+<input
+id="wilaya"
+type="text"
+placeholder="الولاية"
+required>
+
+</div>
+
+
+<div class="form-group">
+
+<label>البلدية</label>
+
+<input
+id="commune"
+type="text"
+placeholder="البلدية"
+required>
+
+</div>
+
+</div>
+
+
+<div class="form-group">
+
+<label>العنوان</label>
+
+<textarea
+id="address"
+placeholder="العنوان بالتفصيل"
+required></textarea>
+
+</div>
+
+
+<div class="order-summary">
+
+<div class="summary-row">
+
+<span>عدد المنتجات</span>
+
+<strong id="summaryItems">0</strong>
+
+</div>
+
+
+<div class="summary-row summary-total">
+
+<span>المجموع</span>
+
+<strong>
+<span id="summaryTotal">0</span> دج
+</strong>
+
+</div>
+
+</div>
+
+
+<button class="confirm-order" type="submit">
+تأكيد الطلب عبر WhatsApp
+</button>
+
+</form>
+
+</div>
+
+</section>
+
+
+<section class="contact-section" id="contact">
+
+<span>CONTACT US</span>
+
+<h2>تواصل معنا</h2>
+
+<p>
+للاستفسار أو المساعدة في اختيار المنتج المناسب،
+تواصلي معنا مباشرة عبر WhatsApp.
+</p>
+
+<a
+class="contact-whatsapp"
+href="https://wa.me/213798949861"
+target="_blank">
+واتساب — تواصل معنا
+</a>
+
+</section>
+
+
+<footer class="copyright">
+
+<p>
+© 2026 Vanilla Cosmetics — جميع الحقوق محفوظة.
+</p>
+
+</footer>
+
+
+<div class="cart-overlay" id="cartOverlay"></div>
+
+
+<aside class="cart-panel" id="cartPanel">
+
+<div class="cart-header">
+
+<h2>سلة التسوق</h2>
+
+<button class="close-cart" id="closeCart">×</button>
+
+</div>
+
+
+<div class="cart-items" id="cartItems"></div>
+
+
+<div class="cart-footer">
+
+<div class="cart-total">
+
+<span>المجموع</span>
+
+<strong>
+<span id="cartTotal">0</span> دج
+</strong>
+
+</div>
+
+<button class="checkout-btn" id="checkoutBtn">
+متابعة الطلب ←
+</button>
+
+</div>
+
+</aside>
+
+
+<a
+class="whatsapp-float"
+href="https://wa.me/213798949861"
+target="_blank"
+aria-label="WhatsApp">
+
+<svg
+class="whatsapp-svg"
+viewBox="0 0 32 32"
+xmlns="http://www.w3.org/2000/svg">
+
+<path d="M16 3C8.82 3 3 8.82 3 16c0 2.3.6 4.46 1.75 6.35L3 29l6.83-1.7A12.94 12.94 0 0 0 16 29c7.18 0 13-5.82 13-13S23.18 3 16 3zm0 23.6c-1.97 0-3.9-.53-5.58-1.54l-.4-.24-4.05 1.01 1.08-3.94-.26-.41A10.55 10.55 0 1 1 16 26.6zm5.8-7.9c-.32-.16-1.88-.93-2.17-1.04-.29-.11-.5-.16-.71.16-.21.31-.81 1.04-.99 1.25-.18.21-.36.23-.67.08-.31-.16-1.3-.48-2.48-1.53-.92-.82-1.54-1.83-1.72-2.14-.18-.31-.02-.48.14-.64.14-.14.31-.36.47-.54.16-.18.21-.31.31-.52.1-.21.05-.39-.03-.55-.08-.16-.71-1.72-.97-2.36-.26-.63-.52-.55-.71-.56h-.6c-.21 0-.55.08-.84.39-.29.31-1.1 1.07-1.1 2.61s1.13 3.03 1.29 3.24c.16.21 2.22 3.39 5.38 4.75.75.32 1.34.51 1.8.65.76.24 1.45.21 2 .13.61-.09 1.88-.77 2.15-1.51.27-.74.27-1.38.19-1.51-.08-.13-.29-.21-.61-.37z"/>
+
+</svg>
+
+</a>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+const WHATSAPP="213798949861";
+
+let cart=JSON.parse(localStorage.getItem("vanillaCart")||"[]");
+
+const $=id=>document.getElementById(id);
+
+
+/* MENU */
+
+$("menuBtn").onclick=()=>{
+
+$("sideMenu").classList.add("active");
+$("overlay").classList.add("active");
+
+};
+
+function closeMenu(){
+
+$("sideMenu").classList.remove("active");
+$("overlay").classList.remove("active");
+
+}
+
+$("closeMenu").onclick=closeMenu;
+$("overlay").onclick=closeMenu;
+
+document.querySelectorAll(".side-menu a").forEach(a=>{
+a.onclick=closeMenu;
+});
+
+
+/* CART */
+
+function openCart(){
+
+$("cartPanel").classList.add("active");
+$("cartOverlay").classList.add("active");
+
+}
+
+function closeCart(){
+
+$("cartPanel").classList.remove("active");
+$("cartOverlay").classList.remove("active");
+
+}
+
+$("cartBtn").onclick=openCart;
+$("closeCart").onclick=closeCart;
+$("cartOverlay").onclick=closeCart;
+
+
+/* ADD TO CART */
+
+document.querySelectorAll(".add-cart").forEach(button=>{
+
+button.onclick=()=>{
+
+const id=button.dataset.id;
+const name=button.dataset.name;
+const price=Number(button.dataset.price);
+
+const existing=cart.find(item=>item.id===id);
+
+if(existing){
+
+existing.quantity++;
+
+}else{
+
+cart.push({
+id:id,
+name:name,
+price:price,
+quantity:1
+});
+
+}
+
+saveCart();
+renderCart();
+
+showToast("تمت إضافة المنتج إلى السلة ✓");
+
+};
+
+});
+
+
+/* SAVE */
+
+function saveCart(){
+
+localStorage.setItem(
+"vanillaCart",
+JSON.stringify(cart)
+);
+
+}
+
+
+/* RENDER CART */
+
+function renderCart(){
+
+const container=$("cartItems");
+
+if(cart.length===0){
+
+container.innerHTML=`
+
+<div class="empty-cart">
+
+<div class="empty-cart-icon">🛍</div>
+
+<p>السلة فارغة</p>
+
+</div>
+
+`;
+
+}else{
+
+container.innerHTML="";
+
+cart.forEach(item=>{
+
+const element=document.createElement("div");
+
+element.className="cart-item";
+
+element.innerHTML=`
+
+<div class="cart-item-info">
+
+<div class="cart-item-name">
+${item.name}
+</div>
+
+<div class="cart-item-price">
+${format(item.price)} دج / القطعة
+</div>
+
+<div class="cart-item-total">
+المجموع: ${format(item.price*item.quantity)} دج
+</div>
+
+<div class="quantity">
+
+<button
+onclick="changeQuantity('${item.id}',1)">
++
+</button>
+
+<span>${item.quantity}</span>
+
+<button
+onclick="changeQuantity('${item.id}',-1)">
+−
+</button>
+
+</div>
+
+</div>
+
+<button
+class="remove-item"
+onclick="removeItem('${item.id}')"
+aria-label="حذف">
+🗑
+</button>
+
+`;
+
+container.appendChild(element);
+
+});
+
+}
+
+updateNumbers();
+
+}
+
+
+/* CHANGE QUANTITY */
+
+function changeQuantity(id,change){
+
+const item=cart.find(x=>x.id===id);
+
+if(!item)return;
+
+item.quantity+=change;
+
+if(item.quantity<=0){
+
+cart=cart.filter(x=>x.id!==id);
+
+}
+
+saveCart();
+renderCart();
+
+}
+
+
+/* REMOVE */
+
+function removeItem(id){
+
+cart=cart.filter(x=>x.id!==id);
+
+saveCart();
+renderCart();
+
+showToast("تم حذف المنتج");
+
+}
+
+
+/* TOTAL */
+
+function total(){
+
+return cart.reduce(
+(sum,item)=>sum+(item.price*item.quantity),
+0
+);
+
+}
+
+
+/* ITEMS COUNT */
+
+function itemsCount(){
+
+return cart.reduce(
+(sum,item)=>sum+item.quantity,
+0
+);
+
+}
+
+
+/* FORMAT */
+
+function format(number){
+
+return number.toLocaleString("fr-DZ");
+
+}
+
+
+/* UPDATE NUMBERS */
+
+function updateNumbers(){
+
+$("cartCount").textContent=itemsCount();
+
+$("cartTotal").textContent=format(total());
+
+$("summaryItems").textContent=itemsCount();
+
+$("summaryTotal").textContent=format(total());
+
+}
+
+
+/* TOAST */
+
+function showToast(message){
+
+const toast=$("toast");
+
+toast.textContent=message;
+
+toast.classList.add("show");
+
+setTimeout(()=>{
+
+toast.classList.remove("show");
+
+},2200);
+
+}
+
+
+/* CHECKOUT */
+
+$("checkoutBtn").onclick=()=>{
+
+if(cart.length===0){
+
+showToast("السلة فارغة");
+
+return;
+
+}
+
+closeCart();
+
+$("order").scrollIntoView({
+behavior:"smooth"
+});
+
+};
+
+
+/* ORDER */
+
+$("orderForm").onsubmit=(event)=>{
+
+event.preventDefault();
+
+if(cart.length===0){
+
+showToast("أضيفي منتجاً إلى السلة أولاً");
+
+return;
+
+}
+
+const name=$("customerName").value.trim();
+const phone=$("customerPhone").value.trim();
+const wilaya=$("wilaya").value.trim();
+const commune=$("commune").value.trim();
+const address=$("address").value.trim();
+
+let message=
+"🌿 طلب جديد من Vanilla Cosmetics\n\n";
+
+message+=
+"👤 الاسم: "+name+"\n";
+
+message+=
+"📞 الهاتف: "+phone+"\n";
+
+message+=
+"📍 الولاية: "+wilaya+"\n";
+
+message+=
+"🏘️ البلدية: "+commune+"\n";
+
+message+=
+"🏠 العنوان: "+address+"\n\n";
+
+message+="🛍️ المنتجات:\n";
+
+cart.forEach(item=>{
+
+message+=
+"• "+item.name+
+" × "+item.quantity+
+" = "+format(item.price*item.quantity)+
+" دج\n";
+
+});
+
+message+=
+"\n💰 المجموع: "+
+format(total())+
+" دج";
+
+const url=
+"https://wa.me/"+
+WHATSAPP+
+"?text="+
+encodeURIComponent(message);
+
+window.open(url,"_blank");
+
+};
+
+
+/* START */
+
+renderCart();
+
+</script>
+
+</body>
+</html>
