@@ -628,6 +628,50 @@ textarea{
 }
 
 </style>
+
+<style>
+.beauty-joseon-gallery {
+    margin: 35px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+.beauty-joseon-gallery .gallery-item {
+    text-align: center;
+}
+
+.beauty-joseon-gallery .gallery-item h4 {
+    margin: 0 0 14px;
+    color: #556B2F;
+    font-size: 18px;
+    line-height: 1.7;
+    font-weight: 700;
+}
+
+.beauty-joseon-gallery .gallery-item img {
+    display: block;
+    width: 100%;
+    max-width: 650px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+@media (max-width: 600px) {
+    .beauty-joseon-gallery {
+        margin: 25px 0;
+        gap: 26px;
+    }
+
+    .beauty-joseon-gallery .gallery-item h4 {
+        font-size: 16px;
+        line-height: 1.6;
+    }
+}
+</style>
+
 </head>
 
 <body>
@@ -986,14 +1030,14 @@ textarea{
         <div class="product-bottom">
 
             <div class="product-price">
-                3800 <small>دج</small>
+                3100 <small>دج</small>
             </div>
 
             <button
                 class="add-cart"
                 data-id="5"
                 data-name="Beauty of Joseon - Sunscreen SPF50+ PA++++"
-                data-price="3800">
+                data-price="3100">
 
                 أضف إلى السلة
 
