@@ -165,6 +165,60 @@ h1{
         max-width:320px;
     }
 }
+
+/* ================= BEAUTY OF JOSEON GALLERY ================= */
+
+.beauty-gallery{
+    max-width:800px;
+    margin:0 auto;
+    padding:10px 20px 55px;
+    text-align:center;
+}
+
+.beauty-gallery-item{
+    margin-bottom:42px;
+}
+
+.beauty-gallery-item h3{
+    color:#556B2F;
+    font-size:20px;
+    line-height:1.8;
+    margin:0 auto 16px;
+    font-weight:bold;
+}
+
+.beauty-gallery-item img{
+    width:100%;
+    max-width:700px;
+    height:auto;
+    display:block;
+    margin:0 auto;
+    border-radius:22px;
+    box-shadow:0 8px 24px rgba(0,0,0,.10);
+}
+
+@media(max-width:600px){
+
+    .beauty-gallery{
+        padding:5px 15px 40px;
+    }
+
+    .beauty-gallery-item{
+        margin-bottom:34px;
+    }
+
+    .beauty-gallery-item h3{
+        font-size:17px;
+        line-height:1.7;
+        margin-bottom:13px;
+    }
+
+    .beauty-gallery-item img{
+        border-radius:18px;
+    }
+
+}
+
 </style>
 </head>
 
@@ -194,7 +248,7 @@ h1{
     </p>
 
     <div class="price">
-        3800 DA
+        3100 DA
     </div>
 
     <a class="order-btn" href="#order">
@@ -242,6 +296,38 @@ h1{
     </div>
 
 </section>
+
+<!-- ================= BEAUTY OF JOSEON GALLERY ================= -->
+
+<section class="beauty-gallery">
+
+    <div class="beauty-gallery-item">
+        <h3>30% مستخلص الارز لترطيب البشرة.</h3>
+        <img src="images/Pic1.jpg" alt="30% مستخلص الارز لترطيب البشرة">
+    </div>
+
+    <div class="beauty-gallery-item">
+        <h3>واقي شمس كوري مناسب للاستخدام اليومي والبشرة الحساسة</h3>
+        <img src="images/Pic2.jpg" alt="واقي شمس كوري مناسب للاستخدام اليومي والبشرة الحساسة">
+    </div>
+
+    <div class="beauty-gallery-item">
+        <h3>واقي شمس بلمسة عناية متكاملة و اشراقة طبيعية</h3>
+        <img src="images/Pic3.jpg" alt="واقي شمس بلمسة عناية متكاملة و اشراقة طبيعية">
+    </div>
+
+    <div class="beauty-gallery-item">
+        <h3>ترطيب عميق بفضل مستخلص الارز و الغليسرين والنياسيناميد</h3>
+        <img src="images/Pic4.jpg" alt="ترطيب عميق بفضل مستخلص الارز و الغليسرين والنياسيناميد">
+    </div>
+
+    <div class="beauty-gallery-item">
+        <h3>سر البشرة الزجاجية الكورية انكشف أخيرا بفضل منتج beauty of joseon sunscreen</h3>
+        <img src="images/Pic5.jpg" alt="سر البشرة الزجاجية الكورية بفضل beauty of joseon sunscreen">
+    </div>
+
+</section>
+
 <section class="section" id="order">
 
     <div class="order-box">
@@ -357,7 +443,7 @@ document.getElementById("orderForm").addEventListener("submit", function(e){
 العنوان: ${address}
 
 المنتج: Beauty of Joseon Sunscreen
-السعر: 3800 DA`;
+السعر: 3100 DA`;
 
     const whatsapp =
         "https://wa.me/213798949861?text=" +
