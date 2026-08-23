@@ -393,6 +393,17 @@ h1{
                 required
             ></textarea>
 
+            <select
+                id="deliveryType"
+                name="deliveryType"
+                required
+                style="width:100%;height:94px;padding:0 28px;border:0;border-radius:28px;background:#fff;color:#777;font-size:25px;font-family:inherit;text-align:right;direction:rtl;box-sizing:border-box;outline:none;margin-bottom:20px;"
+            >
+                <option value="">طريقة التوصيل</option>
+                <option value="التوصيل إلى المنزل">🏠 التوصيل إلى المنزل</option>
+                <option value="التوصيل إلى المكتب">🏢 التوصيل إلى المكتب</option>
+            </select>
+
             <button class="submit-btn" type="submit">
                 تأكيد الطلب عبر WhatsApp
             </button>
@@ -432,6 +443,7 @@ document.getElementById("orderForm").addEventListener("submit", function(e){
     const wilaya = document.getElementById("wilaya").value;
     const commune = document.getElementById("commune").value;
     const address = document.getElementById("address").value;
+    const deliveryType = document.getElementById("deliveryType").value;
 
     const message =
 `طلب Beauty of Joseon Sunscreen
@@ -441,6 +453,7 @@ document.getElementById("orderForm").addEventListener("submit", function(e){
 الولاية: ${wilaya}
 البلدية: ${commune}
 العنوان: ${address}
+طريقة التوصيل: ${deliveryType}
 
 المنتج: Beauty of Joseon Sunscreen
 السعر: 3100 DA`;
